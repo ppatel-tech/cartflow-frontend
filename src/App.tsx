@@ -15,6 +15,8 @@ import { CheckoutPage } from './pages/CheckoutPage'
 import { OrdersPage } from './pages/OrdersPage'
 import { OrderDetailPage } from './pages/OrderDetailPage'
 import { WishlistPage } from './pages/WishlistPage'
+import { NotFoundPage } from './pages/NotFoundPage'
+import { ProfilePage } from './pages/ProfilePage'
 
 
 function App() {
@@ -36,15 +38,16 @@ function App() {
                       <Route path="/products/:id" element={<ProductDetailPage />} />
                       <Route path="/orders" element={<ProtectedRoute><OrdersPage /></ProtectedRoute>} />
                       <Route path="/orders/:id" element={<ProtectedRoute><OrderDetailPage /></ProtectedRoute>} />
-
+                      <Route path="*" element={<NotFoundPage />} />
+                      <Route path="/cart" element={<ProtectedRoute><CartPage /></ProtectedRoute>} />
+                      <Route path="/addresses" element={<ProtectedRoute><AddressPage /></ProtectedRoute>} />
+                      <Route path="/checkout" element={<ProtectedRoute><CheckoutPage /></ProtectedRoute>} />
+                      <Route path="/wishlist" element={<ProtectedRoute><WishlistPage /></ProtectedRoute>} />
+                      <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
                     </Routes>
                   </MainLayout>
                 }
               />
-              <Route path="/cart" element={<ProtectedRoute><CartPage /></ProtectedRoute>} />
-              <Route path="/addresses" element={<ProtectedRoute><AddressPage /></ProtectedRoute>} />
-              <Route path="/checkout" element={<ProtectedRoute><CheckoutPage /></ProtectedRoute>} />
-              <Route path="/wishlist" element={<ProtectedRoute><WishlistPage /></ProtectedRoute>} />
             </Routes>
           </ToastProvider>
         </CartProvider>

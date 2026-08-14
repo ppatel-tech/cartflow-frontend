@@ -9,6 +9,7 @@ import { Button } from '../components/ui/Button'
 import type { AddressResponse } from '../types/address.types'
 import type { AxiosError } from 'axios'
 import type { ApiResponse } from '../types/api.types'
+import { BackButton } from '../components/ui/BackButton'
 
 export function CheckoutPage() {
     const { cart, refreshCart } = useCart()
@@ -91,6 +92,8 @@ export function CheckoutPage() {
 
     return (
         <div className="max-w-2xl mx-auto px-6 py-10">
+              <BackButton label="Back to cart" />
+
             <h1 className="font-display text-2xl text-ink mb-8">Checkout</h1>
 
             <section className="mb-8">

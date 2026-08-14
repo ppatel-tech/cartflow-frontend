@@ -4,6 +4,7 @@ import { orderApi } from '../api/orderApi'
 import { useToast } from '../context/ToastContext'
 import { Button } from '../components/ui/Button'
 import type { OrderResponse } from '../types/order.types'
+import { BackButton } from '../components/ui/BackButton'
 
 export function OrderDetailPage() {
   const { id } = useParams()
@@ -65,6 +66,7 @@ export function OrderDetailPage() {
 
   return (
     <div className="max-w-2xl mx-auto px-6 py-10">
+        <BackButton label="Back to orders" />
       <div className="flex justify-between items-start mb-8">
         <div>
           <p className="font-mono text-xs text-ink/50 mb-1">{order.orderNumber}</p>

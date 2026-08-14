@@ -7,6 +7,7 @@ import { useCart } from '../context/CartContext'
 import { wishlistApi } from '../api/wishlistApi'
 import type { AxiosError } from 'axios'
 import type { ApiResponse } from '../types/api.types'
+import { BackButton } from '../components/ui/BackButton'
 
 export function ProductDetailPage() {
     const { id } = useParams()
@@ -67,7 +68,9 @@ export function ProductDetailPage() {
 
     return (
         <div className="max-w-5xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-2 gap-10">
+            
             <div>
+                <BackButton label="Back to products" />
                 <div className="aspect-square bg-[#E5E3DA] rounded-[4px] overflow-hidden mb-3">
                     {product.imageUrls[activeImage] ? (
                         <img

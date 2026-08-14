@@ -1,9 +1,11 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
+import { useCart } from '../../context/CartContext'
 
 export function Navbar() {
   const { isAuthenticated, user, logout } = useAuth()
   const navigate = useNavigate()
+  const { cart } = useCart()
 
   function handleLogout() {
     logout()
@@ -24,8 +26,13 @@ export function Navbar() {
 
           {isAuthenticated ? (
             <>
-              <Link to="/cart" className="text-ink/70 hover:text-ink transition-colors">
+              <Link to="/cart" className="text-ink/70 hover:text-ink transition-colors relative">
                 Cart
+                {cart && cart.totalItems > 0 && (
+                  <span className="ml-1 inline-flex items-center justify-center w-4 h-4 bg-brass text-ink text-[9px] rounded-full">
+                    {cart.totalItems}
+                  </span>
+                )}
               </Link>
               <Link to="/wishlist" className="text-ink/70 hover:text-ink transition-colors">
                 Wishlist

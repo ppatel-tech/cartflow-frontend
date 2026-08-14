@@ -1,9 +1,30 @@
 import { Link } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
+import { useToast } from '../context/ToastContext'
 import { Button } from '../components/ui/Button'
 
 export function CartPage() {
   const { cart, updateQuantity, removeItem } = useCart()
+  const { showToast } = useToast()
+
+  // Quantity update handler
+  async function handleUpdateQuantity(itemId: number, newQuantity: number) {
+    try {
+      await updateQuantity(itemId, newQuantity)
+    } catch {
+      showToast('Failed to update quantity')
+    }
+  }
+
+  // Item remove handler with toast notification
+  async function handleRemove(itemId: number) {
+    try {
+      await removeItem(itemId)
+      showToast('Item removed from cart')
+    } catch {
+      showToast('Failed to remove item')
+    }
+  }
 
   if (!cart || cart.items.length === 0) {
     return (
@@ -27,7 +48,12 @@ export function CartPage() {
             <div className="w-20 h-20 bg-[#E5E3DA] rounded-[4px] overflow-hidden shrink-0">
               {item.productImageUrl && (
                 <img
-                  src={`http://localhost:8080${item.productImageUrl}`}
+                  src={
+                    item.productImageUrl.startsWith('http')
+                      ? item.productImageUrl
+                      : `http://localhost:8080${item.productImageUrl}`
+                  }
+                  alt={item.productName}
                   className="w-full h-full object-cover"
                 />
               )}
@@ -38,17 +64,18 @@ export function CartPage() {
               <p className="font-mono text-xs text-ink/50">₹{item.unitPrice.toFixed(2)} each</p>
             </div>
 
+            {/* Quantity Controls */}
             <div className="flex items-center gap-2 font-mono text-sm">
               <button
-                onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))}
-                className="w-7 h-7 border border-hairline rounded-[4px] hover:border-ink"
+                onClick={() => handleUpdateQuantity(item.id, Math.max(1, item.quantity - 1))}
+                className="w-7 h-7 border border-hairline rounded-[4px] hover:border-ink cursor-pointer"
               >
                 −
               </button>
               <span className="w-6 text-center">{item.quantity}</span>
               <button
-                onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                className="w-7 h-7 border border-hairline rounded-[4px] hover:border-ink"
+                onClick={() => handleUpdateQuantity(item.id, item.quantity + 1)}
+                className="w-7 h-7 border border-hairline rounded-[4px] hover:border-ink cursor-pointer"
               >
                 +
               </button>
@@ -58,9 +85,10 @@ export function CartPage() {
               ₹{item.subtotal.toFixed(2)}
             </p>
 
+            {/* Remove Button */}
             <button
-              onClick={() => removeItem(item.id)}
-              className="font-mono text-xs text-brick hover:underline"
+              onClick={() => handleRemove(item.id)}
+              className="font-mono text-xs text-brick hover:underline cursor-pointer"
             >
               Remove
             </button>
