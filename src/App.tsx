@@ -17,6 +17,7 @@ import { OrderDetailPage } from './pages/OrderDetailPage'
 import { WishlistPage } from './pages/WishlistPage'
 import { NotFoundPage } from './pages/NotFoundPage'
 import { ProfilePage } from './pages/ProfilePage'
+import { PaymentPage } from './pages/PaymentPage'
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
                       <Route path="/checkout" element={<ProtectedRoute><CheckoutPage /></ProtectedRoute>} />
                       <Route path="/wishlist" element={<ProtectedRoute><WishlistPage /></ProtectedRoute>} />
                       <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+                      <Route path="/payment/:orderId" element={<ProtectedRoute><PaymentPage /></ProtectedRoute>} />
                     </Routes>
                   </MainLayout>
                 }

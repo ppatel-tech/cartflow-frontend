@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { orderApi } from '../api/orderApi'
 import { useToast } from '../context/ToastContext'
 import { Button } from '../components/ui/Button'
@@ -66,7 +66,7 @@ export function OrderDetailPage() {
 
   return (
     <div className="max-w-2xl mx-auto px-6 py-10">
-        <BackButton label="Back to orders" />
+      <BackButton label="Back to orders" />
       <div className="flex justify-between items-start mb-8">
         <div>
           <p className="font-mono text-xs text-ink/50 mb-1">{order.orderNumber}</p>
@@ -122,8 +122,13 @@ export function OrderDetailPage() {
           <span>Total</span><span>₹{order.finalAmount.toFixed(2)}</span>
         </div>
       </section>
-
+      {order.orderStatus === 'CREATED' && order.paymentStatus !== 'SUCCESS' && (
+        <Link to={`/payment/${order.id}`}>
+          <Button className="mb-3 w-full">Complete payment</Button>
+        </Link>
+      )}
       <div className="flex gap-3">
+
         <Button variant="secondary" onClick={handleDownloadInvoice} disabled={isDownloading}>
           {isDownloading ? 'Downloading...' : 'Download invoice'}
         </Button>

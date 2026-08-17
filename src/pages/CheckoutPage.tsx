@@ -68,7 +68,7 @@ export function CheckoutPage() {
             })
             await refreshCart()
             showToast('Order placed successfully')
-            navigate(`/orders/${res.data.data.id}`)
+            navigate(`/payment/${res.data.data.id}`)
         } catch (err) {
             const axiosError = err as AxiosError<ApiResponse<null>>
             setOrderError(axiosError.response?.data?.message || 'Could not place order')
