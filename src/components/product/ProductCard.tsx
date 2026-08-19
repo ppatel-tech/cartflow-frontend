@@ -33,7 +33,14 @@ export function ProductCard({ product }: { product: ProductResponse }) {
         <h3 className="font-body text-sm text-ink font-medium leading-snug mb-2 line-clamp-2">
           {product.name}
         </h3>
-
+        {product.totalReviews > 0 && (
+          <div className="flex items-center gap-1 mb-1.5">
+            <span className="text-brass text-xs">★</span>
+            <span className="font-mono text-[11px] text-ink/60">
+              {product.averageRating.toFixed(1)} ({product.totalReviews})
+            </span>
+          </div>
+        )}
         <div className="flex items-baseline gap-2">
           <span className="font-mono text-sm text-ink">₹{displayPrice.toFixed(2)}</span>
           {hasDiscount && (
