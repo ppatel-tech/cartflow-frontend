@@ -1,5 +1,5 @@
 import axiosClient from './axiosClient'
-import type { ApiResponse } from '../types/api.types'
+import type { ApiResponse, PageResponse } from '../types/api.types'
 import type { UserResponse, UpdateProfileRequest } from '../types/user.types'
 
 export const userApi = {
@@ -11,4 +11,11 @@ export const userApi = {
 
   deleteMe: () =>
     axiosClient.delete<ApiResponse<void>>('/users/me'),
+
+    getAllForAdmin: (page: number, size: number) =>
+    axiosClient.get<ApiResponse<PageResponse<UserResponse>>>('/admin/users', { params: { page, size } }),
+
+  updateStatus: (id: number, status: string) =>
+    axiosClient.patch<ApiResponse<UserResponse>>(`/admin/users/${id}/status`, { status }),
+  
 }

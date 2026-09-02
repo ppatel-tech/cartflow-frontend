@@ -20,4 +20,13 @@ export const orderApi = {
 
   downloadInvoice: (id: number) =>
     axiosClient.get(`/orders/${id}/invoice`, { responseType: 'blob' }),
+
+    getAllForAdmin: (page: number, size: number) =>
+    axiosClient.get<ApiResponse<PageResponse<OrderResponse>>>('/admin/orders', { params: { page, size, sort: 'createdAt,desc' } }),
+
+  getByIdForAdmin: (id: number) =>
+    axiosClient.get<ApiResponse<OrderResponse>>(`/admin/orders/${id}`),
+
+  updateStatus: (id: number, status: string) =>
+    axiosClient.patch<ApiResponse<OrderResponse>>(`/admin/orders/${id}/status`, { status }),
 }

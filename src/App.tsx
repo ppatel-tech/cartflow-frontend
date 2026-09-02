@@ -8,7 +8,7 @@ import { ProductListPage } from './pages/ProductListPage'
 import { ProductDetailPage } from './pages/ProductDetailPage'
 import { CartProvider } from './context/CartContext'
 import { CartPage } from './pages/CartPage'
-import { ProtectedRoute } from './routs/ProtectedRoute'
+import { ProtectedRoute } from './routes/ProtectedRoute'
 import { AddressPage } from './pages/AddressPage'
 import { ToastProvider } from './context/ToastContext'
 import { CheckoutPage } from './pages/CheckoutPage'
@@ -19,7 +19,12 @@ import { NotFoundPage } from './pages/NotFoundPage'
 import { ProfilePage } from './pages/ProfilePage'
 import { PaymentPage } from './pages/PaymentPage'
 import { NotificationsPage } from './pages/NotificationsPage'
-
+import { AdminRoute } from './routes/AdminRoute'
+import { AdminLayout } from './layouts/AdminLayout'
+import { AdminDashboardPage } from './pages/admin/AdminDashboardPage'
+import { AdminOrdersPage } from './pages/admin/AdminOrdersPage'
+import { AdminUsersPage } from './pages/admin/AdminUsersPage'
+import { AdminReportsPage } from './pages/admin/AdminReportsPage'
 
 function App() {
   return (
@@ -31,8 +36,24 @@ function App() {
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
               <Route
+                path="/admin/*"
+                element={
+                  <AdminRoute>
+                    <AdminLayout>
+                      <Routes>
+                        <Route path="/" element={<AdminDashboardPage />} />
+                        <Route path="/orders" element={<AdminOrdersPage />} />
+                        <Route path="/users" element={<AdminUsersPage />} />
+                        <Route path="/reports" element={<AdminReportsPage />} />
+                      </Routes>
+                    </AdminLayout>
+                  </AdminRoute>
+                }
+              />
+              <Route
                 path="/*"
                 element={
+
                   <MainLayout>
                     <Routes>
                       <Route path="/" element={<HomePage />} />
