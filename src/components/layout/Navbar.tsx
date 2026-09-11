@@ -6,7 +6,7 @@ import { notificationApi } from '../../api/notificationApi'
 
 
 export function Navbar() {
-  const { isAuthenticated, user, logout } = useAuth()
+  const { isAuthenticated, logout } = useAuth() // user deconstructing removed
   const navigate = useNavigate()
   const { cart } = useCart()
   const [unreadCount, setUnreadCount] = useState(0)
