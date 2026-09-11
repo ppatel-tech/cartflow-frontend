@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import { useToast } from '../context/ToastContext'
 import { Button } from '../components/ui/Button'
+import { getImageUrl } from '../utils/imageUrl'
 
 export function CartPage() {
   const { cart, updateQuantity, removeItem } = useCart()
@@ -49,9 +50,9 @@ export function CartPage() {
               {item.productImageUrl && (
                 <img
                   src={
-                    item.productImageUrl.startsWith('http')
+                    item.productImageUrl?.startsWith('http')
                       ? item.productImageUrl
-                      : `http://localhost:8080${item.productImageUrl}`
+                      : getImageUrl(item.productImageUrl)
                   }
                   alt={item.productName}
                   className="w-full h-full object-cover"

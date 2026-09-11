@@ -1,7 +1,7 @@
 import axios, { AxiosError, type InternalAxiosRequestConfig } from 'axios'
 
 const axiosClient = axios.create({
-  baseURL: 'http://localhost:8080/api/v1',
+  baseURL: `${import.meta.env.VITE_API_URL}/api/v1`,
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ axiosClient.interceptors.response.use(
 
       try {
         const refreshToken = localStorage.getItem('refreshToken')
-        const response = await axios.post('http://localhost:8080/api/v1/auth/refresh', {
+        const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/v1/auth/refresh`, {
           refreshToken,
         })
 

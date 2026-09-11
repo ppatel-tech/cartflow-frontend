@@ -5,6 +5,7 @@ import { useCart } from '../context/CartContext'
 import { useToast } from '../context/ToastContext'
 import { Button } from '../components/ui/Button'
 import type { WishlistResponse } from '../types/wishlist.types'
+import { getImageUrl } from '../utils/imageUrl'
 
 export function WishlistPage() {
   const [wishlist, setWishlist] = useState<WishlistResponse | null>(null)
@@ -60,7 +61,7 @@ export function WishlistPage() {
             <Link to={`/products/${item.productId}`} className="w-16 h-16 bg-[#E5E3DA] rounded-[4px] overflow-hidden shrink-0">
               {item.productImageUrl && (
                 <img
-                  src={`http://localhost:8080${item.productImageUrl}`}
+                  src={getImageUrl(item.productImageUrl)}
                   className="w-full h-full object-cover"
                 />
               )}

@@ -14,6 +14,7 @@ import { ReviewList } from '../components/product/ReviewList'
 import { StarRating } from '../components/product/StarRating'
 import { useAuth } from '../context/AuthContext'
 import type { ReviewResponse, ReviewRequest } from '../types/review.types'
+import { getImageUrl } from '../utils/imageUrl'
 
 export function ProductDetailPage() {
   const { id } = useParams()
@@ -143,7 +144,7 @@ export function ProductDetailPage() {
           <div className="aspect-square bg-[#E5E3DA] rounded-[4px] overflow-hidden mb-3">
             {product.imageUrls && product.imageUrls[activeImage] ? (
               <img
-                src={`http://localhost:8080${product.imageUrls[activeImage]}`}
+                src={getImageUrl(product.imageUrls[activeImage])}
                 alt={product.name}
                 className="w-full h-full object-cover"
               />
@@ -164,7 +165,7 @@ export function ProductDetailPage() {
                     i === activeImage ? 'border-forest' : 'border-transparent'
                   }`}
                 >
-                  <img src={`http://localhost:8080${url}`} className="w-full h-full object-cover" alt="" />
+                  <img src={getImageUrl(url)} className="w-full h-full object-cover" alt="" />
                 </button>
               ))}
             </div>

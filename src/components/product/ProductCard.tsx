@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import type { ProductResponse } from '../../types/product.types'
+import { getImageUrl } from '../../utils/imageUrl'
 
 export function ProductCard({ product }: { product: ProductResponse }) {
   const displayPrice = product.discountPrice ?? product.price
@@ -15,7 +16,7 @@ export function ProductCard({ product }: { product: ProductResponse }) {
       <div className="aspect-square bg-[#E5E3DA] overflow-hidden">
         {product.imageUrls[0] ? (
           <img
-            src={`http://localhost:8080${product.imageUrls[0]}`}
+            src={getImageUrl(product.imageUrls[0])}
             alt={product.name}
             className="w-full h-full object-cover"
           />
